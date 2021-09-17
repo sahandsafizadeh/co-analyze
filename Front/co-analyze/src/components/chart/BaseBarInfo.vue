@@ -2,14 +2,14 @@
   <div id="container" :style="containerStyle">
     <div class="center-bold-text">{{ country }}</div>
     <hr/>
-    <div class="info">
+    <section class="info">
       <span id="vaccination" class="center-bold-text">{{ vaccination }}%</span>
       <span class="unit">&nbsp;Vaccinated</span>
-    </div>
-    <div class="info">
+    </section>
+    <section class="info">
       <span class="center-bold-text" :style="statisticStyle">{{ statistics }}</span>
       <span class="unit">&nbsp;{{ type }}</span>
-    </div>
+    </section>
   </div>
 </template>
 

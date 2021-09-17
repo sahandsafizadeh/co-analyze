@@ -1,5 +1,5 @@
 <template>
-  <div class="bar-chart">
+  <section class="bar-chart">
     <h3 id="y-label" class="legend">New {{ type }}</h3>
     <base-bar v-for="(s, i) in statistics"
               :key="i"
@@ -18,7 +18,7 @@
     <div id="max-stat" class="legend quantity">{{ maxStats }}</div>
     <div id="min-perc" class="legend quantity">{{ minPercentage }}%</div>
     <div id="max-perc" class="legend quantity">{{ maxPercentage }}%</div>
-  </div>
+  </section>
 </template>
 
 <script>

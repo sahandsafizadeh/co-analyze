@@ -1,5 +1,6 @@
 <template>
   <table>
+    <thead>
     <tr>
       <th>#</th>
       <th>Country</th>
@@ -12,6 +13,8 @@
       <th>Vaccination Percentage</th>
       <th>Population</th>
     </tr>
+    </thead>
+    <tbody>
     <base-statistics-table-row v-for="(s, i) in statistics"
                                :key="i"
                                :i="i + 1"
@@ -25,6 +28,7 @@
                                :vaccination-percentage="s.vaccinationPercentage"
                                :population="s.population"
     ></base-statistics-table-row>
+    </tbody>
   </table>
 </template>
 
