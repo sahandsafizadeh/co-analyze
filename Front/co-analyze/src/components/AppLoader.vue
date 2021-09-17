@@ -41,7 +41,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: #000000;
   display: flex;
   flex-direction: column;
   justify-content: center;

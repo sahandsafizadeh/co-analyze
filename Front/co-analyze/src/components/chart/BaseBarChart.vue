@@ -60,6 +60,12 @@ export default {
     };
   },
 
+  watch: {
+    stats() {
+      this.reinitializeChart();
+    },
+  },
+
   computed: {
     color() {
       return this.type === 'Cases' ? this.CASE_COLOR : this.DEATH_COLOR;
@@ -101,16 +107,19 @@ export default {
         this.heights.push(height);
       }
     },
+    reinitializeChart() {
+      if (this.stats.length === 0)
+        return;
+      this.initMaxStat();
+      this.initStatSortedOnVaccination();
+      this.initScaledHeights(this.getMaxRelativeStat());
+      this.minPercentage = this.statistics[0].vaccinationPercentage;
+      this.maxPercentage = this.statistics[this.statistics.length - 1].vaccinationPercentage;
+    },
   },
 
   created() {
-    if (this.stats.length === 0)
-      return;
-    this.initMaxStat();
-    this.initStatSortedOnVaccination();
-    this.initScaledHeights(this.getMaxRelativeStat());
-    this.minPercentage = this.statistics[0].vaccinationPercentage;
-    this.maxPercentage = this.statistics[this.statistics.length - 1].vaccinationPercentage;
+    this.reinitializeChart();
   },
 };
 </script>
