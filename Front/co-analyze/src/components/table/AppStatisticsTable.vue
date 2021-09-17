@@ -47,7 +47,7 @@ export default {
 
 <style scoped>
 table {
-  margin: 100px auto;
+  margin: 40px auto;
   border-radius: 5px;
   border: 7px ridge #69ab00;
 }
