@@ -2,6 +2,7 @@
 server/bin/
 server/pkg/
 server/static/
+db/stats.sqlite
 
 # Logs
 server/req_log.txt
