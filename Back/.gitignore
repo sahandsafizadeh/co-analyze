@@ -5,7 +5,6 @@ server/static/
 db/stats.sqlite
 
 # Logs
-server/req_log.txt
 server/err_log.txt
 server/srv_log.txt
 
