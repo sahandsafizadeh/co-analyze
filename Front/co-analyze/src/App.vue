@@ -24,7 +24,8 @@ export default {
 
   data() {
     return {
-      HOST_URL: 'http://localhost:8080/',
+      HOST_URL: 'http://localhost:8080',
+      STATISTICS_PATH: "/statistics",
       chartStats: [],
       tableStats: [],
       statistics: [],
@@ -43,7 +44,7 @@ export default {
 
   methods: {
     load() {
-      axios.get(this.HOST_URL)
+      axios.get(this.HOST_URL + this.STATISTICS_PATH)
           .then((response) => {
             this.statistics = response.data;
             this.chartStats = this.statistics;
@@ -92,8 +93,8 @@ export default {
   },
 
   created() {
-    // this.load();
-    this.loadRandomly();
+    this.load();
+    // this.loadRandomly();
   },
 };
 </script>
