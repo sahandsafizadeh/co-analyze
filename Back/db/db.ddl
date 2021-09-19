@@ -8,14 +8,13 @@ DROP TABLE IF EXISTS DateStatistics;
 
 CREATE TABLE Countries
 (
-    id                    INTEGER PRIMARY KEY AUTOINCREMENT,
-    name                  TEXT UNIQUE NOT NULL,
-    population            INTEGER     NOT NULL,
-    totalCases            INTEGER     NOT NULL,
-    totalDeaths           INTEGER     NOT NULL,
-    fullyVaccinated       INTEGER     NOT NULL,
-    dosesAdministered     INTEGER     NOT NULL,
-    vaccinationPercentage REAL        NOT NULL,
+    name                  TEXT PRIMARY KEY NOT NULL,
+    population            INTEGER          NOT NULL,
+    totalCases            INTEGER          NOT NULL,
+    totalDeaths           INTEGER          NOT NULL,
+    fullyVaccinated       INTEGER          NOT NULL,
+    dosesAdministered     INTEGER          NOT NULL,
+    vaccinationPercentage REAL             NOT NULL,
     CONSTRAINT check_country CHECK
         (
             (LENGTH(name) <= 50)
@@ -36,13 +35,13 @@ CREATE TABLE Countries
 
 CREATE TABLE DateStatistics
 (
-    cId       INTEGER NOT NULL,
     date      TEXT    NOT NULL,
+    country   INTEGER NOT NULL,
     newCases  INTEGER NOT NULL,
     newDeaths INTEGER NOT NULL,
-    PRIMARY KEY (cId, date),
-    FOREIGN KEY (cId)
-        REFERENCES Countries (id)
+    PRIMARY KEY (country, date),
+    FOREIGN KEY (country)
+        REFERENCES Countries (name)
         ON DELETE CASCADE,
     CONSTRAINT check_statistic CHECK
         (
