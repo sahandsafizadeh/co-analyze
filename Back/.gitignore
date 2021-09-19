@@ -1,0 +1,13 @@
+# Project
+server/bin/
+server/pkg/
+server/static/
+db/stats.sqlite
+
+# Logs
+server/err_log.txt
+server/srv_log.txt
+
+# Editor
+.idea/
+Back.iml
