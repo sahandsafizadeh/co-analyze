@@ -8,7 +8,6 @@ import (
 const (
 	driver = "sqlite3"
 	path   = "./db/stats.sqlite"
-	//path   = "/opt/stats.sqlite"
 )
 
 // DB Exposed global database connection configurations.
