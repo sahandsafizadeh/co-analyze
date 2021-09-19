@@ -8,10 +8,15 @@ import (
 )
 
 const VaccinationStatisticsSourceURL = "https://covidvax.live/"
-const deathsAndCaseSourceURL = "https://www.worldometers.info/coronavirus/"
+const DeathsAndCaseStatisticsSourceURL = "https://www.worldometers.info/coronavirus/"
 
+// Fetch Gathers Covid-19 statistics as HTML content and parses them.
+// Vaccination statistics are fetched from {VaccinationStatisticsSourceURL}.
+// Deaths and cases statistics are fetched from {DeathsAndCaseStatisticsSourceURL}.
+// Then the required information is extracted and returned for the two HTML documents.
+// Any error due to retrieving HTML contents is returned.
 func Fetch() (dcStats, vacStats []model.Statistics, err error) {
-	dcHtml, err := getHTML(deathsAndCaseSourceURL)
+	dcHtml, err := getHTML(DeathsAndCaseStatisticsSourceURL)
 	if err != nil {
 		return dcStats, vacStats, err
 	}

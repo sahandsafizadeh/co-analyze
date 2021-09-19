@@ -32,7 +32,7 @@ func parseVaccinationStatistics(root *html.Node) []model.Statistics {
 		}
 
 		// fully vaccinated
-		td = nextNode(td, 3)
+		td = nextNode(td, 5)
 		if fullyVaccinated, ok := extractInteger(td, false); ok {
 			stat.FullyVaccinated = fullyVaccinated
 		} else {
