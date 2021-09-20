@@ -99,7 +99,7 @@ func UpdateLatestStatisticsForCountry(stat model.Statistics, now time.Time) erro
 // Any occurring database error is returned.
 func FindAllStatistics() (stats []model.Statistics, err error) {
 	db := config.DB
-	now := util.GetTodayDate()
+	now := util.GetYesterdayDate()
 	rows, err := db.Query(`SELECT
        name,
        newCases,
