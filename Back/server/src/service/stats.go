@@ -1,7 +1,6 @@
 package service
 
 import (
-	sqlite "github.com/mattn/go-sqlite3"
 	"server/server/src/crawl"
 	"server/server/src/model"
 	"server/server/src/repository"
@@ -26,10 +25,9 @@ func updateStatistics() {
 func updateStatisticDatabase(fullStatistics []model.Statistics) error {
 	now := util.GetTodayDate()
 	for _, stat := range fullStatistics {
-		if err := repository.SaveGeneralStatisticsOfCountry(stat); err != nil {
-			if err, ok := err.(sqlite.Error); !(ok && err.Error() == repository.ErrUniqueCountryName) {
-				return err
-			}
+		if err := repository.SaveGeneralStatisticsOfCountry(stat); err != nil &&
+			err.Error() != repository.ErrUniqueCountryName {
+			return err
 		}
 	}
 	for _, stat := range fullStatistics {
@@ -38,10 +36,9 @@ func updateStatisticDatabase(fullStatistics []model.Statistics) error {
 		}
 	}
 	for _, stat := range fullStatistics {
-		if err := repository.SaveLatestStatisticsOfCountry(stat, now); err != nil {
-			if err, ok := err.(sqlite.Error); !(ok && err.Error() == repository.ErrUniqueLatestRecordForCountry) {
-				return err
-			}
+		if err := repository.SaveLatestStatisticsOfCountry(stat, now); err != nil &&
+			err.Error() != repository.ErrUniqueLatestRecordForCountry {
+			return err
 		}
 	}
 	for _, stat := range fullStatistics {

@@ -7,7 +7,7 @@ import (
 )
 
 const LogClearPeriod = 24 * time.Hour
-const StatisticsUpdatePeriod = 10 * time.Minute
+const StatisticsUpdatePeriod = 15 * time.Minute
 
 // RunServices Starts an infinite thread for each background service.
 // The first handles clearing log files based on {LogClearPeriod} duration.
