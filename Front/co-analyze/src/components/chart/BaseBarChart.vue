@@ -15,7 +15,7 @@
       Vaccination
       &#8594;&#8594;&#8594;&#8594;&#8594;
     </h3>
-    <div id="max-stat" class="legend quantity">{{ maxStats }}</div>
+    <div id="max-stat" class="legend quantity">{{ maxStat }}</div>
     <div id="min-perc" class="legend quantity">{{ minPercentage }}%</div>
     <div id="max-perc" class="legend quantity">{{ maxPercentage }}%</div>
   </section>
@@ -54,7 +54,7 @@ export default {
       DEATH_COLOR: '#ff0000',
       minPercentage: 0,
       maxPercentage: 0,
-      maxStats: 0,
+      maxStat: 0,
       heights: [],
       statistics: [],
     };
@@ -76,15 +76,6 @@ export default {
     getStat(fullStatus) {
       return this.type === 'Cases' ? fullStatus.newCases : fullStatus.newDeaths;
     },
-    getMaxRelativeStat() {
-      let max = this.getStat(this.stats[0]) / this.stats[0].population;
-      for (let i = 1; i < this.stats.length; i++) {
-        let cur = this.getStat(this.stats[i]) / this.stats[i].population;
-        if (max < cur)
-          max = cur;
-      }
-      return max;
-    },
     initMaxStat() {
       let max = this.getStat(this.stats[0]);
       for (let i = 1; i < this.stats.length; i++) {
@@ -92,17 +83,16 @@ export default {
         if (max < cur)
           max = cur;
       }
-      this.maxStats = max;
+      this.maxStat = 0 < max ? max : 1;
     },
     initStatSortedOnVaccination() {
       for (let stat of this.stats)
         this.statistics.push(stat);
       this.statistics.sort((a, b) => a.vaccinationPercentage - b.vaccinationPercentage);
     },
-    initScaledHeights(maxRelativeStats) {
+    initScaledHeights() {
       for (let stat of this.statistics) {
-        let relativeStat = this.getStat(stat) / stat.population;
-        let rawHeight = (this.MAX_HEIGHT * relativeStat) / maxRelativeStats;
+        let rawHeight = (this.MAX_HEIGHT * this.getStat(stat)) / this.maxStat;
         let height = this.MIN_HEIGHT + Math.floor(rawHeight);
         this.heights.push(height);
       }
@@ -112,7 +102,7 @@ export default {
         return;
       this.initMaxStat();
       this.initStatSortedOnVaccination();
-      this.initScaledHeights(this.getMaxRelativeStat());
+      this.initScaledHeights();
       this.minPercentage = this.statistics[0].vaccinationPercentage;
       this.maxPercentage = this.statistics[this.statistics.length - 1].vaccinationPercentage;
     },
