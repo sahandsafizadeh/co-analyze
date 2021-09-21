@@ -37,8 +37,11 @@ export default {
 
   watch: {
     country(value) {
+      let lcSearchValue = value.toLowerCase();
       this.tableStats = this.statistics
-          .filter(s => s.country.startsWith(value));
+          .filter(s => s.country
+              .toLowerCase()
+              .startsWith(lcSearchValue));
     },
   },
 
